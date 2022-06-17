@@ -8,6 +8,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.kafka.example.AppConstants;
+import com.kafka.example.model.User;
 
 /**
  * @author kadam.sachin
@@ -21,5 +22,14 @@ public class KafKaProducerService {
 	
 	public void sendMessage(String message) {
 		this.kafkaTemplate.send(AppConstants.TOPIC_NAME, message);
+	}
+
+	/**
+	 * send user data as String
+	 * @param user
+	 */
+	public void sendMessage(User user) {
+		this.kafkaTemplate.send(AppConstants.TOPIC_NAME, user.toString());
+		
 	}
 }
