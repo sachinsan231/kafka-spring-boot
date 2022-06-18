@@ -37,6 +37,7 @@ services:
       SPRING_ARTEMIS_HOST: jms
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
   inventory-failover: 
     image: sfgbeerworks/sfg-brewery-inventory-failover
     ports:
@@ -49,7 +50,8 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://netflix:eureka@localhost:8761/eureka
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-  beer-service:
+    restart: on-failure
+   beer-service:
     image: sfgbeerworks/sfg-brewery-beer-service
     ports:
       - 8080:8080
@@ -65,6 +67,7 @@ services:
       SPRING_ARTEMIS_HOST: jms
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
   order-service:
     image: sfgbeerworks/sfg-brewery-beer-service
     ports:
@@ -80,7 +83,5 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin
       SPRING_ARTEMIS_HOST: jms
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true' 
-      
-    
-    
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
